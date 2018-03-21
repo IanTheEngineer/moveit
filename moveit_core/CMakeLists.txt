@@ -34,7 +34,8 @@ find_package(urdfdom_headers REQUIRED)
 
 find_package(catkin REQUIRED
 COMPONENTS
-  eigen_conversions
+  tf2_eigen
+  eigen_conversions # FIXME this must be removed
   eigen_stl_containers
   geometric_shapes
   geometry_msgs
