@@ -343,6 +343,15 @@ bool PR2ArmKinematicsPlugin::searchPositionIK(const geometry_msgs::Pose& ik_pose
   Eigen::Affine3d tp;
   tf::poseMsgToEigen(ik_pose, tp);
   tf::transformEigenToKDL(tp, pose_desired);
+  /*
+
+  Eigen::Affine3d tp;
+  //tf::poseMsgToEigen(ik_pose, tp);
+  fromMsg(const geometry_msgs::Pose& in, tf2::Transform& out)
+  tf2::fromMsg(ik_pose, tp);
+  tf::transformEigenToKDL(tp, pose_desired);
+  KDL::Frame pose_desired = transformToKDL(const geometry_msgs::TransformStamped& t)
+  */
 
   // Do the IK
   KDL::JntArray jnt_pos_in;
