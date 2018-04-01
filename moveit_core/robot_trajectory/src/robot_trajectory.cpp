@@ -36,7 +36,7 @@
 
 #include <moveit/robot_trajectory/robot_trajectory.h>
 #include <moveit/robot_state/conversions.h>
-#include <eigen_conversions/eigen_msg.h>
+#include <tf2_eigen/tf2_eigen.h>
 #include <boost/math/constants/constants.hpp>
 #include <numeric>
 
@@ -275,8 +275,12 @@ void robot_trajectory::RobotTrajectory::getRobotTrajectoryMsg(moveit_msgs::Robot
       trajectory.multi_dof_joint_trajectory.points[i].transforms.resize(mdof.size());
       for (std::size_t j = 0; j < mdof.size(); ++j)
       {
-        tf::transformEigenToMsg(waypoints_[i]->getJointTransform(mdof[j]),
-                                trajectory.multi_dof_joint_trajectory.points[i].transforms[j]);
+        // FIXME: there should be a
+        // geometry_msgs::Transform eigenToTransform(const Eigen::Affine3d& T)
+        // so that we don't need to use the intermediate TransformStamped
+        geometry_msgs::TransformStamped ts;
+        ts = tf2::eigenToTransform(waypoints_[i]->getJointTransform(mdof[j]));
+        trajectory.multi_dof_joint_trajectory.points[i].transforms[j] = ts.transform;
         // TODO: currently only checking for planar multi DOF joints / need to add check for floating
         if (waypoints_[i]->hasVelocities() && (mdof[j]->getType() == robot_model::JointModel::JointType::PLANAR))
         {
@@ -377,8 +381,7 @@ void robot_trajectory::RobotTrajectory::setRobotTrajectoryMsg(const robot_state:
     {
       for (std::size_t j = 0; j < trajectory.multi_dof_joint_trajectory.joint_names.size(); ++j)
       {
-        Eigen::Affine3d t;
-        tf::transformMsgToEigen(trajectory.multi_dof_joint_trajectory.points[i].transforms[j], t);
+        Eigen::Affine3d t = tf2::transformToEigen(trajectory.multi_dof_joint_trajectory.points[i].transforms[j]);
         st->setJointPositions(trajectory.multi_dof_joint_trajectory.joint_names[j], t);
       }
       this_time_stamp = trajectory.multi_dof_joint_trajectory.header.stamp +

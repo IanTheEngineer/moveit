@@ -35,7 +35,7 @@
 /* Author: Ioan Sucan */
 
 #include <moveit/transforms/transforms.h>
-#include <eigen_conversions/eigen_msg.h>
+#include <tf2_eigen/tf2_eigen.h>
 #include <boost/algorithm/string/trim.hpp>
 #include <ros/console.h>
 
@@ -143,8 +143,7 @@ void moveit::core::Transforms::setTransform(const geometry_msgs::TransformStampe
 {
   if (sameFrame(transform.child_frame_id, target_frame_))
   {
-    Eigen::Affine3d t;
-    tf::transformMsgToEigen(transform.transform, t);
+    Eigen::Affine3d t = tf2::transformToEigen(transform.transform);
     setTransform(t, transform.header.frame_id);
   }
   else
@@ -166,8 +165,8 @@ void moveit::core::Transforms::copyTransforms(std::vector<geometry_msgs::Transfo
   std::size_t i = 0;
   for (FixedTransformsMap::const_iterator it = transforms_.begin(); it != transforms_.end(); ++it, ++i)
   {
+    transforms[i] = tf2::eigenToTransform(it->second);
     transforms[i].child_frame_id = target_frame_;
     transforms[i].header.frame_id = it->first;
-    tf::transformEigenToMsg(it->second, transforms[i].transform);
   }
 }
