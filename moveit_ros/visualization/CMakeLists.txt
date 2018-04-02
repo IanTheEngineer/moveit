@@ -28,7 +28,7 @@ find_package(catkin REQUIRED COMPONENTS
   interactive_markers
   class_loader
   rviz
-  tf
+  tf2_eigen
   roscpp
   rosconsole
   object_recognition_msgs
