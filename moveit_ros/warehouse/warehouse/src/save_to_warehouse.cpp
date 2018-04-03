@@ -44,6 +44,7 @@
 #include <boost/program_options/parsers.hpp>
 #include <boost/program_options/variables_map.hpp>
 #include <ros/ros.h>
+#include <tf/transform_listener.h>
 
 static const std::string ROBOT_DESCRIPTION = "robot_description";
 
