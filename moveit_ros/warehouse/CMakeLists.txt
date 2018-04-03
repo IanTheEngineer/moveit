@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   rosconsole
   warehouse_ros
   tf2_eigen
+  tf
 )
 
 catkin_package(
