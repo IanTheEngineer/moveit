@@ -21,7 +21,7 @@ find_package(catkin REQUIRED COMPONENTS
   urdf
   tf
   tf_conversions
-  eigen_conversions
+  tf2_eigen
 )
 
 find_package(Eigen3 REQUIRED)

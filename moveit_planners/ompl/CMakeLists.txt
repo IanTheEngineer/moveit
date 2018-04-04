@@ -17,7 +17,6 @@ find_package(catkin REQUIRED COMPONENTS
   pluginlib
   tf
   dynamic_reconfigure
-  eigen_conversions
   )
 
 find_package(OMPL REQUIRED)
