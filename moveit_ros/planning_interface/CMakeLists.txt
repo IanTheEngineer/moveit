@@ -22,7 +22,10 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_warehouse
   moveit_ros_manipulation
   moveit_ros_move_group
+  tf2
   eigen_conversions
+  tf2_eigen
+  tf2_geometry_msgs
   tf_conversions
   tf
   roscpp
