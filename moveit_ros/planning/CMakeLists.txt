@@ -21,7 +21,11 @@ find_package(catkin REQUIRED COMPONENTS
   urdf
   tf
   tf_conversions
+  tf2
+  tf2_geometry_msgs
   tf2_eigen
+  tf2_msgs
+  tf2_ros
 )
 
 find_package(Eigen3 REQUIRED)
