@@ -36,6 +36,7 @@
 
 #include <moveit/planning_scene_monitor/planning_scene_monitor.h>
 #include <cstdlib>
+#include <tf2_ros/transform_listener.h>
 
 static const std::string ROBOT_DESCRIPTION = "robot_description";
 
@@ -49,7 +50,8 @@ int main(int argc, char** argv)
   double radius = 0.02;
   double lifetime = 600.0;
 
-  boost::shared_ptr<tf::TransformListener> tr(new tf::TransformListener());
+  boost::shared_ptr<tf2_ros::Buffer> tr = boost::make_shared<tf2_ros::Buffer>();
+  boost::shared_ptr<tf2_ros::TransformListener> tfl = boost::make_shared<tf2_ros::TransformListener>(*tr);
   planning_scene_monitor::PlanningSceneMonitor psm(ROBOT_DESCRIPTION, tr);
   if (psm.getPlanningScene())
   {
