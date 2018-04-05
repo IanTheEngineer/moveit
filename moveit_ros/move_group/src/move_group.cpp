@@ -35,7 +35,7 @@
 /* Author: Ioan Sucan */
 
 #include <moveit/planning_scene_monitor/planning_scene_monitor.h>
-#include <tf/transform_listener.h>
+#include <tf2_ros/transform_listener.h>
 #include <moveit/move_group/capability_names.h>
 #include <moveit/move_group/move_group_capability.h>
 #include <boost/algorithm/string/join.hpp>
@@ -173,10 +173,11 @@ int main(int argc, char** argv)
   ros::AsyncSpinner spinner(1);
   spinner.start();
 
-  boost::shared_ptr<tf::TransformListener> tf(new tf::TransformListener(ros::Duration(10.0)));
+  boost::shared_ptr<tf2_ros::Buffer> tf_buffer = boost::make_shared<tf2_ros::Buffer>(ros::Duration(10.0));
+  boost::shared_ptr<tf2_ros::TransformListener> tfl = boost::make_shared<tf2_ros::TransformListener>(*tf_buffer);
 
   planning_scene_monitor::PlanningSceneMonitorPtr planning_scene_monitor(
-      new planning_scene_monitor::PlanningSceneMonitor(ROBOT_DESCRIPTION, tf));
+      new planning_scene_monitor::PlanningSceneMonitor(ROBOT_DESCRIPTION, tf_buffer));
 
   if (planning_scene_monitor->getPlanningScene())
   {
