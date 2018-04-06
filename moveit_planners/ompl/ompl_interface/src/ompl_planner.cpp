@@ -37,7 +37,7 @@
 #include <moveit/ompl_interface/ompl_interface.h>
 #include <moveit/planning_scene_monitor/planning_scene_monitor.h>
 #include <moveit/ompl_interface/model_based_planning_context.h>
-#include <tf/transform_listener.h>
+#include <tf2_ros/transform_listener.h>
 #include <moveit_msgs/DisplayTrajectory.h>
 #include <moveit/profiler/profiler.h>
 #include <moveit_msgs/GetMotionPlan.h>
@@ -130,8 +130,9 @@ int main(int argc, char** argv)
   ros::AsyncSpinner spinner(1);
   spinner.start();
 
-  boost::shared_ptr<tf::TransformListener> tf(new tf::TransformListener());
-  planning_scene_monitor::PlanningSceneMonitor psm(ROBOT_DESCRIPTION, tf);
+  boost::shared_ptr<tf2_ros::Buffer> tf_buffer = boost::make_shared<tf2_ros::Buffer>();
+  boost::shared_ptr<tf2_ros::TransformListener> tf_listener = boost::make_shared<tf2_ros::TransformListener>(*tf_buffer);
+  planning_scene_monitor::PlanningSceneMonitor psm(ROBOT_DESCRIPTION, tf_buffer);
   if (psm.getPlanningScene())
   {
     psm.startWorldGeometryMonitor();
