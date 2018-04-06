@@ -51,6 +51,17 @@
 
 #include "ui_motion_planning_rviz_plugin_frame.h"
 
+#include <tf/tf.h>
+
+class Transformer2 : public tf::Transformer
+{
+public:
+    tf2_ros::Buffer& getBuffer()
+    {
+        return tf2_buffer_;
+    }
+};
+
 namespace moveit_rviz_plugin
 {
 MotionPlanningFrame::MotionPlanningFrame(MotionPlanningDisplay* pdisplay, rviz::DisplayContext* context,
@@ -299,8 +310,12 @@ void MotionPlanningFrame::changePlanningGroupHelper()
     opt.node_handle_ = ros::NodeHandle(planning_display_->getMoveGroupNS());
     try
     {
+      // FIXME!!(imcmahon) this is a horrible hack. Remove once tf2_ros::Buffer is exposed from RViz
+      auto & foo = *(context_->getFrameManager()->getTFClientPtr());
+      Transformer2 *bar = dynamic_cast<Transformer2* >(&foo);
+      tf_buffer_.reset(&bar->getBuffer());
       move_group_.reset(new moveit::planning_interface::MoveGroupInterface(
-          opt, context_->getFrameManager()->getTFClientPtr(), ros::WallDuration(30, 0)));
+          opt, tf_buffer_, ros::WallDuration(30, 0)));
       if (planning_scene_storage_)
         move_group_->setConstraintsDatabase(ui_->database_host->text().toStdString(), ui_->database_port->value());
     }

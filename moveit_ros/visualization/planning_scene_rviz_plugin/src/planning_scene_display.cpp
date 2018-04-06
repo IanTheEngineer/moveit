@@ -57,6 +57,17 @@
 #include <OgreSceneManager.h>
 #include <OgreSceneNode.h>
 
+#include <tf/tf.h>
+
+class Transformer2 : public tf::Transformer
+{
+public:
+    tf2_ros::Buffer& getBuffer()
+    {
+        return tf2_buffer_;
+    }
+};
+
 namespace moveit_rviz_plugin
 {
 // ******************************************************************************************
@@ -486,8 +497,12 @@ void PlanningSceneDisplay::unsetLinkColor(rviz::Robot* robot, const std::string&
 // ******************************************************************************************
 planning_scene_monitor::PlanningSceneMonitorPtr PlanningSceneDisplay::createPlanningSceneMonitor()
 {
+  // FIXME!!(imcmahon) this is a horrible hack. Remove once tf2_ros::Buffer is exposed from RViz
+  auto & foo = *(context_->getFrameManager()->getTFClientPtr());
+  Transformer2 *bar = dynamic_cast<Transformer2* >(&foo);
+  tf_buffer_.reset(&bar->getBuffer());
   return planning_scene_monitor::PlanningSceneMonitorPtr(new planning_scene_monitor::PlanningSceneMonitor(
-      robot_description_property_->getStdString(), context_->getFrameManager()->getTFClientPtr(),
+      robot_description_property_->getStdString(), tf_buffer_,
       getNameStd() + "_planning_scene_monitor"));
 }
 
