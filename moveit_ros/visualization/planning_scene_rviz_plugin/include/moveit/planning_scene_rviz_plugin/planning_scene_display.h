@@ -38,6 +38,7 @@
 #define MOVEIT_VISUALIZATION_SCENE_DISPLAY_RVIZ_PLUGIN_SCENE_DISPLAY_
 
 #include <rviz/display.h>
+#include <tf2_ros/buffer.h>
 
 #ifndef Q_MOC_RUN
 #include <moveit/rviz_plugin_render_tools/planning_scene_render.h>
@@ -208,6 +209,8 @@ protected:
   rviz::FloatProperty* scene_display_time_property_;
   rviz::EnumProperty* octree_render_property_;
   rviz::EnumProperty* octree_coloring_property_;
+  // FIXME(imcmahon) Remove friendship once RViz exposes tf2_ros::Buffer object
+  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
 };
 
 }  // namespace moveit_rviz_plugin
