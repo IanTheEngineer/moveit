@@ -44,6 +44,7 @@
 #include <tf2_eigen/tf2_eigen.h>
 #include <tf2/LinearMath/Quaternion.h>
 #include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+#include <tf2_ros/buffer.h>
 
 #include <boost/python.hpp>
 #include <boost/shared_ptr.hpp>
@@ -64,7 +65,7 @@ public:
   // needed
   MoveGroupInterfaceWrapper(const std::string& group_name, const std::string& robot_description)
     : py_bindings_tools::ROScppInitializer()
-    , MoveGroupInterface(Options(group_name, robot_description), boost::shared_ptr<tf::Transformer>(),
+    , MoveGroupInterface(Options(group_name, robot_description), boost::shared_ptr<tf2_ros::Buffer>(),
                          ros::WallDuration(5, 0))
   {
   }
