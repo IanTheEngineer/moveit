@@ -15,7 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rosconsole
   pluginlib
-  tf
+  tf2_ros
   dynamic_reconfigure
   )
 
