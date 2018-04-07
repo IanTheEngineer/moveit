@@ -309,7 +309,6 @@ private:
   ros::NodeHandle nh_;
   ros::Publisher planning_scene_publisher_;
   ros::Publisher planning_scene_world_publisher_;
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
 
   collision_detection::CollisionWorld::ObjectConstPtr scaled_object_;
 
