@@ -492,7 +492,7 @@ void SemanticWorld::transformTableArray(object_recognition_msgs::TableArray& tab
     Eigen::Affine3d original_pose;
     tf2::fromMsg(table_array.tables[i].pose, original_pose);
     original_pose = original_transform * original_pose;
-     table_array.tables[i].pose = tf2::toMsg(original_pose);
+    table_array.tables[i].pose = tf2::toMsg(original_pose);
     table_array.tables[i].header.frame_id = planning_scene_->getTransforms().getTargetFrame();
     ROS_INFO_STREAM("Successfully transformed table array from " << original_frame << "to "
                                                                  << table_array.tables[i].header.frame_id);
