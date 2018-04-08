@@ -75,8 +75,8 @@ private:
   ros::NodeHandle root_nh_;
   ros::NodeHandle private_nh_;
 
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
-  boost::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 
   /* params */
   std::string point_cloud_topic_;

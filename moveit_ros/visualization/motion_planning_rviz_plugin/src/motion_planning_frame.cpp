@@ -319,7 +319,7 @@ void MotionPlanningFrame::changePlanningGroupHelper()
       // but it would be better to remove the null shared pointer once tf2_ros::Buffer is exposed from
       // RViz with something like context_->getFrameManager()->getTFClientPtr()
       move_group_.reset(new moveit::planning_interface::MoveGroupInterface(
-          opt, boost::shared_ptr<tf2_ros::Buffer>(), ros::WallDuration(30, 0)));
+          opt, std::shared_ptr<tf2_ros::Buffer>(), ros::WallDuration(30, 0)));
       if (planning_scene_storage_)
         move_group_->setConstraintsDatabase(ui_->database_host->text().toStdString(), ui_->database_port->value());
     }

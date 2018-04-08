@@ -65,14 +65,14 @@ public:
    * @param robot_model The current kinematic model to build on
    * @param tf A pointer to the tf transformer to use
    */
-  CurrentStateMonitor(const robot_model::RobotModelConstPtr& robot_model, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer);
+  CurrentStateMonitor(const robot_model::RobotModelConstPtr& robot_model, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer);
 
   /** @brief Constructor.
    *  @param robot_model The current kinematic model to build on
    *  @param tf A pointer to the tf transformer to use
    *  @param nh A ros::NodeHandle to pass node specific options
    */
-  CurrentStateMonitor(const robot_model::RobotModelConstPtr& robot_model, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+  CurrentStateMonitor(const robot_model::RobotModelConstPtr& robot_model, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                       ros::NodeHandle nh);
 
   ~CurrentStateMonitor();
@@ -200,7 +200,7 @@ private:
   void tfCallback();
 
   ros::NodeHandle nh_;
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
   robot_model::RobotModelConstPtr robot_model_;
   robot_state::RobotState robot_state_;
   std::map<const moveit::core::JointModel*, ros::Time> joint_time_;

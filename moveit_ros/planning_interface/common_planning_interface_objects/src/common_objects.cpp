@@ -55,8 +55,8 @@ struct SharedStorage
   }
 
   boost::mutex lock_;
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
-  boost::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
   std::map<std::string, robot_model_loader::RobotModelLoaderPtr> model_loaders_;
   std::map<std::string, planning_scene_monitor::CurrentStateMonitorPtr> state_monitors_;
 };
@@ -79,7 +79,7 @@ namespace moveit
 {
 namespace planning_interface
 {
-boost::shared_ptr<tf2_ros::Buffer> getSharedTF()
+std::shared_ptr<tf2_ros::Buffer> getSharedTF()
 {
   SharedStorage& s = getSharedStorage();
   boost::mutex::scoped_lock slock(s.lock_);
@@ -107,13 +107,13 @@ robot_model::RobotModelConstPtr getSharedRobotModel(const std::string& robot_des
 }
 
 planning_scene_monitor::CurrentStateMonitorPtr getSharedStateMonitor(const robot_model::RobotModelConstPtr& kmodel,
-                                                                     const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer)
+                                                                     const std::shared_ptr<tf2_ros::Buffer>& tf_buffer)
 {
   return getSharedStateMonitor(kmodel, tf_buffer, ros::NodeHandle());
 }
 
 planning_scene_monitor::CurrentStateMonitorPtr getSharedStateMonitor(const robot_model::RobotModelConstPtr& kmodel,
-                                                                     const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                     const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                      ros::NodeHandle nh)
 {
   SharedStorage& s = getSharedStorage();
