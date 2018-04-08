@@ -110,7 +110,7 @@ public:
    *  @param name A name identifying this planning scene monitor
    */
   PlanningSceneMonitor(const std::string& robot_description,
-                       const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer = boost::shared_ptr<tf2_ros::Buffer>(),
+                       const std::shared_ptr<tf2_ros::Buffer>& tf_buffer = std::shared_ptr<tf2_ros::Buffer>(),
                        const std::string& name = "");
 
   /** @brief Constructor
@@ -119,7 +119,7 @@ public:
    *  @param name A name identifying this planning scene monitor
    */
   PlanningSceneMonitor(const robot_model_loader::RobotModelLoaderPtr& rml,
-                       const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer = boost::shared_ptr<tf2_ros::Buffer>(),
+                       const std::shared_ptr<tf2_ros::Buffer>& tf_buffer = std::shared_ptr<tf2_ros::Buffer>(),
                        const std::string& name = "");
 
   /** @brief Constructor
@@ -129,7 +129,7 @@ public:
    *  @param name A name identifying this planning scene monitor
    */
   PlanningSceneMonitor(const planning_scene::PlanningScenePtr& scene, const std::string& robot_description,
-                       const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer = boost::shared_ptr<tf2_ros::Buffer>(),
+                       const std::shared_ptr<tf2_ros::Buffer>& tf_buffer = std::shared_ptr<tf2_ros::Buffer>(),
                        const std::string& name = "");
 
   /** @brief Constructor
@@ -140,7 +140,7 @@ public:
    */
   PlanningSceneMonitor(const planning_scene::PlanningScenePtr& scene,
                        const robot_model_loader::RobotModelLoaderPtr& rml,
-                       const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer = boost::shared_ptr<tf2_ros::Buffer>(),
+                       const std::shared_ptr<tf2_ros::Buffer>& tf_buffer = std::shared_ptr<tf2_ros::Buffer>(),
                        const std::string& name = "");
 
   ~PlanningSceneMonitor();
@@ -233,7 +233,7 @@ public:
   }
 
   /** @brief Get the instance of the TF client that was passed to the constructor of this class. */
-  const boost::shared_ptr<tf2_ros::Buffer>& getTFClient() const
+  const std::shared_ptr<tf2_ros::Buffer>& getTFClient() const
   {
     return tf_buffer_;
   }
@@ -451,7 +451,7 @@ protected:
 
   ros::NodeHandle nh_;
   ros::NodeHandle root_nh_;
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
 
   std::string robot_description_;
 

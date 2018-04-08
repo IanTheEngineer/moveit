@@ -43,13 +43,13 @@
 #include <limits>
 
 planning_scene_monitor::CurrentStateMonitor::CurrentStateMonitor(const robot_model::RobotModelConstPtr& robot_model,
-                                                                 const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer)
+                                                                 const std::shared_ptr<tf2_ros::Buffer>& tf_buffer)
   : CurrentStateMonitor(robot_model, tf_buffer, ros::NodeHandle())
 {
 }
 
 planning_scene_monitor::CurrentStateMonitor::CurrentStateMonitor(const robot_model::RobotModelConstPtr& robot_model,
-                                                                 const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                 const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                  ros::NodeHandle nh)
   : nh_(nh)
   , tf_buffer_(tf_buffer)

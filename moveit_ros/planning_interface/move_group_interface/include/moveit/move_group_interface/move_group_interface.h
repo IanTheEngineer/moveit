@@ -146,9 +146,9 @@ public:
       \param wait_for_servers. Timeout for connecting to action servers. Zero time means unlimited waiting.
     */
   MoveGroupInterface(const Options& opt,
-                     const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer = boost::shared_ptr<tf2_ros::Buffer>(),
+                     const std::shared_ptr<tf2_ros::Buffer>& tf_buffer = std::shared_ptr<tf2_ros::Buffer>(),
                      const ros::WallDuration& wait_for_servers = ros::WallDuration());
-  MOVEIT_DEPRECATED MoveGroupInterface(const Options& opt, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+  MOVEIT_DEPRECATED MoveGroupInterface(const Options& opt, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                        const ros::Duration& wait_for_servers);
 
   /**
@@ -159,9 +159,9 @@ public:
       \param wait_for_servers. Timeout for connecting to action servers. Zero time means unlimited waiting.
     */
   MoveGroupInterface(const std::string& group,
-                     const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer = boost::shared_ptr<tf2_ros::Buffer>(),
+                     const std::shared_ptr<tf2_ros::Buffer>& tf_buffer = std::shared_ptr<tf2_ros::Buffer>(),
                      const ros::WallDuration& wait_for_servers = ros::WallDuration());
-  MOVEIT_DEPRECATED MoveGroupInterface(const std::string& group, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+  MOVEIT_DEPRECATED MoveGroupInterface(const std::string& group, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                        const ros::Duration& wait_for_servers);
 
   ~MoveGroupInterface();
