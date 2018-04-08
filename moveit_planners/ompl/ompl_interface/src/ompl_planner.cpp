@@ -41,6 +41,7 @@
 #include <moveit_msgs/DisplayTrajectory.h>
 #include <moveit/profiler/profiler.h>
 #include <moveit_msgs/GetMotionPlan.h>
+#include <memory>
 
 static const std::string PLANNER_NODE_NAME = "ompl_planning";  // name of node
 static const std::string PLANNER_SERVICE_NAME =

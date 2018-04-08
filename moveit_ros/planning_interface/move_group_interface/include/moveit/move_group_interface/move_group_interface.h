@@ -49,7 +49,7 @@
 #include <moveit_msgs/PlaceLocation.h>
 #include <moveit_msgs/MotionPlanRequest.h>
 #include <geometry_msgs/PoseStamped.h>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <tf2_ros/buffer.h>
 
 namespace moveit
