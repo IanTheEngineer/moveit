@@ -34,7 +34,7 @@
 
 /* Author: Jon Binney, Ioan Sucan */
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <ros/ros.h>
 #include <tf2_ros/transform_listener.h>
 #include <moveit/occupancy_map_monitor/occupancy_map_monitor.h>
