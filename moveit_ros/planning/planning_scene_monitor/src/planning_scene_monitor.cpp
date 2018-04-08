@@ -119,7 +119,7 @@ const std::string planning_scene_monitor::PlanningSceneMonitor::MONITORED_PLANNI
                                                                                                  "scene";
 
 planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(const std::string& robot_description,
-                                                                   const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                   const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                    const std::string& name)
   : monitor_name_(name), nh_("~"), tf_buffer_(tf_buffer)
 {
@@ -129,7 +129,7 @@ planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(const std::st
 
 planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(const planning_scene::PlanningScenePtr& scene,
                                                                    const std::string& robot_description,
-                                                                   const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                   const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                    const std::string& name)
   : monitor_name_(name), nh_("~"), tf_buffer_(tf_buffer)
 {
@@ -138,7 +138,7 @@ planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(const plannin
 }
 
 planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(
-    const robot_model_loader::RobotModelLoaderPtr& rm_loader, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+    const robot_model_loader::RobotModelLoaderPtr& rm_loader, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
     const std::string& name)
   : monitor_name_(name), nh_("~"), tf_buffer_(tf_buffer), rm_loader_(rm_loader)
 {
@@ -147,7 +147,7 @@ planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(
 
 planning_scene_monitor::PlanningSceneMonitor::PlanningSceneMonitor(
     const planning_scene::PlanningScenePtr& scene, const robot_model_loader::RobotModelLoaderPtr& rm_loader,
-    const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer, const std::string& name)
+    const std::shared_ptr<tf2_ros::Buffer>& tf_buffer, const std::string& name)
   : monitor_name_(name), nh_("~"), tf_buffer_(tf_buffer), rm_loader_(rm_loader)
 {
   initialize(scene);

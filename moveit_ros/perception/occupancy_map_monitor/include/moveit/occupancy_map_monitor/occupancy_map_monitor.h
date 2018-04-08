@@ -57,10 +57,10 @@ namespace occupancy_map_monitor
 class OccupancyMapMonitor
 {
 public:
-  OccupancyMapMonitor(const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer, const std::string& map_frame = "",
+  OccupancyMapMonitor(const std::shared_ptr<tf2_ros::Buffer>& tf_buffer, const std::string& map_frame = "",
                       double map_resolution = 0.0);
   OccupancyMapMonitor(double map_resolution = 0.0);
-  OccupancyMapMonitor(const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer, ros::NodeHandle& nh,
+  OccupancyMapMonitor(const std::shared_ptr<tf2_ros::Buffer>& tf_buffer, ros::NodeHandle& nh,
                       const std::string& map_frame = "", double map_resolution = 0.0);
 
   ~OccupancyMapMonitor();
@@ -96,7 +96,7 @@ public:
     return map_resolution_;
   }
 
-  const boost::shared_ptr<tf2_ros::Buffer>& getTFClient() const
+  const std::shared_ptr<tf2_ros::Buffer>& getTFClient() const
   {
     return tf_buffer_;
   }
@@ -136,7 +136,7 @@ private:
   bool getShapeTransformCache(std::size_t index, const std::string& target_frame, const ros::Time& target_time,
                               ShapeTransformCache& cache) const;
 
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
   std::string map_frame_;
   double map_resolution_;
   boost::mutex parameters_lock_;
