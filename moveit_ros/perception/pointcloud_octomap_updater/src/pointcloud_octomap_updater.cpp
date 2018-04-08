@@ -91,7 +91,8 @@ bool PointCloudOctomapUpdater::setParams(XmlRpc::XmlRpcValue& params)
 bool PointCloudOctomapUpdater::initialize()
 {
   tf_buffer_.reset(new tf2_ros::Buffer());
-  tf_listener_.reset(new tf2_ros::TransformListener(*tf_buffer_.get()));
+  // FIXME(imcmahon) should the TransformListener use the private_nh_, root_nh_ or create it's own NodeHandle?
+  tf_listener_.reset(new tf2_ros::TransformListener(*tf_buffer_, private_nh_));
   shape_mask_.reset(new point_containment_filter::ShapeMask());
   shape_mask_->setTransformCallback(boost::bind(&PointCloudOctomapUpdater::getShapeTransform, this, _1, _2));
   if (!filtered_cloud_topic_.empty())
