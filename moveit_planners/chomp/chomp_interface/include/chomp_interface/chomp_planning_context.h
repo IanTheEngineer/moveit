@@ -67,7 +67,6 @@ public:
 private:
   CHOMPInterfacePtr chomp_interface_;
   moveit::core::RobotModelConstPtr robot_model_;
-
 };
 
 } /* namespace chomp_interface */

@@ -128,8 +128,8 @@ void planning_scene_monitor::CurrentStateMonitor::startStateMonitor(const std::s
       joint_state_subscriber_ = nh_.subscribe(joint_states_topic, 25, &CurrentStateMonitor::jointStateCallback, this);
     if (tf_buffer_ && robot_model_->getMultiDOFJointModels().size() > 0)
     {
-      tf_connection_.reset(
-          new TFConnection(tf_buffer_->_addTransformsChangedListener(boost::bind(&CurrentStateMonitor::tfCallback, this))));
+      tf_connection_.reset(new TFConnection(
+          tf_buffer_->_addTransformsChangedListener(boost::bind(&CurrentStateMonitor::tfCallback, this))));
     }
     state_monitor_started_ = true;
     monitor_start_time_ = ros::Time::now();
@@ -419,8 +419,8 @@ void planning_scene_monitor::CurrentStateMonitor::tfCallback()
       ros::Time latest_common_time;
       std::string err;
       if (tf_buffer_->_getLatestCommonTime(tf_buffer_->_lookupFrameNumber(parent_frame),
-                                           tf_buffer_->_lookupFrameNumber(child_frame),
-                                           latest_common_time, &err) != tf2_msgs::TF2Error::NO_ERROR)
+                                           tf_buffer_->_lookupFrameNumber(child_frame), latest_common_time,
+                                           &err) != tf2_msgs::TF2Error::NO_ERROR)
       {
         ROS_WARN_STREAM_THROTTLE(1, "Unable to update multi-DOF joint '"
                                         << joint->getName() << "': TF has no common time between '"

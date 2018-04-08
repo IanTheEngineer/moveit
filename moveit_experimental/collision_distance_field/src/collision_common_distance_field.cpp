@@ -212,7 +212,7 @@ void getBodySphereVisualizationMarkers(GroupStateRepresentationConstPtr& gsr, st
       PosedBodySphereDecompositionVectorPtr sphere_decp = gsr->attached_body_decompositions_[i];
       sphere_decp->updatePose(j, att->getGlobalCollisionBodyTransforms()[j]);
 
-       sphere_marker.pose.position = tf2::toMsg(sphere_decp->getSphereCenters()[j]);
+      sphere_marker.pose.position = tf2::toMsg(sphere_decp->getSphereCenters()[j]);
       sphere_marker.scale.x = sphere_marker.scale.y = sphere_marker.scale.z =
           sphere_decp->getCollisionSpheres()[j].radius_;
       sphere_marker.id = id;
