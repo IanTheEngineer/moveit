@@ -50,8 +50,8 @@ int main(int argc, char** argv)
   double radius = 0.02;
   double lifetime = 600.0;
 
-  boost::shared_ptr<tf2_ros::Buffer> tr = boost::make_shared<tf2_ros::Buffer>();
-  boost::shared_ptr<tf2_ros::TransformListener> tfl = boost::make_shared<tf2_ros::TransformListener>(*tr);
+  std::shared_ptr<tf2_ros::Buffer> tr = std::make_shared<tf2_ros::Buffer>();
+  std::shared_ptr<tf2_ros::TransformListener> tfl = std::make_shared<tf2_ros::TransformListener>(*tr);
   planning_scene_monitor::PlanningSceneMonitor psm(ROBOT_DESCRIPTION, tr);
   if (psm.getPlanningScene())
   {

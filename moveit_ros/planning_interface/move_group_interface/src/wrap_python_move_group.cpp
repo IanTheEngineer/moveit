@@ -67,7 +67,7 @@ public:
                             const std::string& ns = "")
     : py_bindings_tools::ROScppInitializer()
     , MoveGroupInterface(Options(group_name, robot_description, ros::NodeHandle(ns)),
-                         boost::shared_ptr<tf2_ros::Buffer>(), ros::WallDuration(5, 0))
+                         std::shared_ptr<tf2_ros::Buffer>(), ros::WallDuration(5, 0))
   {
   }
 
@@ -112,15 +112,6 @@ public:
     return setJointValueTarget(js_msg);
   }
 
-  bool setStateValueTarget(const std::string& state_str)
-  {
-    moveit_msgs::RobotState msg;
-    py_bindings_tools::deserializeMsg(state_str, msg);
-    robot_state::RobotState state(moveit::planning_interface::MoveGroupInterface::getJointValueTarget());
-    moveit::core::robotStateMsgToRobotState(msg, state);
-    return moveit::planning_interface::MoveGroupInterface::setJointValueTarget(state);
-  }
-
   bp::list getJointValueTargetPythonList()
   {
     const robot_state::RobotState& values = moveit::planning_interface::MoveGroupInterface::getJointValueTarget();
@@ -128,14 +119,6 @@ public:
     for (const double *it = values.getVariablePositions(), *end = it + getVariableCount(); it != end; ++it)
       l.append(*it);
     return l;
-  }
-
-  std::string getJointValueTarget()
-  {
-    moveit_msgs::RobotState msg;
-    const robot_state::RobotState state = moveit::planning_interface::MoveGroupInterface::getJointValueTarget();
-    moveit::core::robotStateToRobotStateMsg(state, msg);
-    return py_bindings_tools::serializeMsg(msg);
   }
 
   void rememberJointValuesFromPythonList(const std::string& string, bp::list& values)
@@ -146,13 +129,6 @@ public:
   const char* getPlanningFrameCStr() const
   {
     return getPlanningFrame().c_str();
-  }
-
-  std::string getInterfaceDescriptionPython()
-  {
-    moveit_msgs::PlannerInterfaceDescription msg;
-    getInterfaceDescription(msg);
-    return py_bindings_tools::serializeMsg(msg);
   }
 
   bp::list getActiveJointsList() const

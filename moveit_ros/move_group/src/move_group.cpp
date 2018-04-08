@@ -173,8 +173,8 @@ int main(int argc, char** argv)
   ros::AsyncSpinner spinner(1);
   spinner.start();
 
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer = boost::make_shared<tf2_ros::Buffer>(ros::Duration(10.0));
-  boost::shared_ptr<tf2_ros::TransformListener> tfl = boost::make_shared<tf2_ros::TransformListener>(*tf_buffer);
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer = std::make_shared<tf2_ros::Buffer>(ros::Duration(10.0));
+  std::shared_ptr<tf2_ros::TransformListener> tfl = std::make_shared<tf2_ros::TransformListener>(*tf_buffer);
 
   planning_scene_monitor::PlanningSceneMonitorPtr planning_scene_monitor(
       new planning_scene_monitor::PlanningSceneMonitor(ROBOT_DESCRIPTION, tf_buffer));

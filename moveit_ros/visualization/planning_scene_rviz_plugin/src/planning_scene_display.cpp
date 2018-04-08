@@ -491,7 +491,7 @@ planning_scene_monitor::PlanningSceneMonitorPtr PlanningSceneDisplay::createPlan
   // but it would be better to remove the null shared pointer once tf2_ros::Buffer is exposed from
   // RViz with something like context_->getFrameManager()->getTFClientPtr()
   return planning_scene_monitor::PlanningSceneMonitorPtr(new planning_scene_monitor::PlanningSceneMonitor(
-      robot_description_property_->getStdString(), boost::shared_ptr<tf2_ros::Buffer>(),
+      robot_description_property_->getStdString(), std::shared_ptr<tf2_ros::Buffer>(),
       getNameStd() + "_planning_scene_monitor"));
 }
 
