@@ -42,7 +42,6 @@
 #include <moveit/robot_state/robot_state.h>
 #include <sensor_msgs/JointState.h>
 #include <boost/function.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/thread/mutex.hpp>
 #include <moveit/macros/deprecation.h>
 #include <boost/thread/condition_variable.hpp>

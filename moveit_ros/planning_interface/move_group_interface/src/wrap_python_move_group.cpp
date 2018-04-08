@@ -47,7 +47,7 @@
 #include <tf2_ros/buffer.h>
 
 #include <boost/python.hpp>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <Python.h>
 
 /** @cond IGNORE */
