@@ -67,7 +67,7 @@ private:
   void stopHelper();
 
   ros::NodeHandle nh_;
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
   image_transport::ImageTransport input_depth_transport_;
   image_transport::ImageTransport model_depth_transport_;
   image_transport::ImageTransport filtered_depth_transport_;

@@ -43,13 +43,13 @@ namespace moveit
 {
 namespace planning_interface
 {
-boost::shared_ptr<tf2_ros::Buffer> getSharedTF();
+std::shared_ptr<tf2_ros::Buffer> getSharedTF();
 
 robot_model::RobotModelConstPtr getSharedRobotModel(const std::string& robot_description);
 
 /**
   @brief getSharedStateMonitor is a simpler version of getSharedStateMonitor(const robot_model::RobotModelConstPtr
-  &kmodel, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+  &kmodel, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
     ros::NodeHandle nh = ros::NodeHandle() ). It calls this function using the default constructed ros::NodeHandle
 
   @param kmodel
@@ -57,7 +57,7 @@ robot_model::RobotModelConstPtr getSharedRobotModel(const std::string& robot_des
   @return
  */
 planning_scene_monitor::CurrentStateMonitorPtr getSharedStateMonitor(const robot_model::RobotModelConstPtr& kmodel,
-                                                                     const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer);
+                                                                     const std::shared_ptr<tf2_ros::Buffer>& tf_buffer);
 
 /**
   @brief getSharedStateMonitor
@@ -68,7 +68,7 @@ planning_scene_monitor::CurrentStateMonitorPtr getSharedStateMonitor(const robot
   @return
  */
 planning_scene_monitor::CurrentStateMonitorPtr getSharedStateMonitor(const robot_model::RobotModelConstPtr& kmodel,
-                                                                     const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                     const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                      ros::NodeHandle nh);
 
 }  // namespace planning interface

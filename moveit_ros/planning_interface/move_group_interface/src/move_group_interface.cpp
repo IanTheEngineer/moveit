@@ -93,7 +93,7 @@ enum ActiveTargetType
 class MoveGroupInterface::MoveGroupInterfaceImpl
 {
 public:
-  MoveGroupInterfaceImpl(const Options& opt, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+  MoveGroupInterfaceImpl(const Options& opt, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                          const ros::WallDuration& wait_for_servers)
     : opt_(opt), node_handle_(opt.node_handle_), tf_buffer_(tf_buffer)
   {
@@ -311,7 +311,7 @@ public:
       constraints_init_thread_->join();
   }
 
-  const boost::shared_ptr<tf2_ros::Buffer>& getTF() const
+  const std::shared_ptr<tf2_ros::Buffer>& getTF() const
   {
     return tf_buffer_;
   }
@@ -1304,7 +1304,7 @@ private:
 
   Options opt_;
   ros::NodeHandle node_handle_;
-  boost::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
   robot_model::RobotModelConstPtr robot_model_;
   planning_scene_monitor::CurrentStateMonitorPtr current_state_monitor_;
   std::unique_ptr<actionlib::SimpleActionClient<moveit_msgs::MoveGroupAction> > move_action_client_;
@@ -1360,7 +1360,7 @@ private:
 }
 
 moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(const std::string& group_name,
-                                                                   const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                   const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                    const ros::WallDuration& wait_for_servers)
 {
   if (!ros::ok())
@@ -1369,21 +1369,21 @@ moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(const std::st
 }
 
 moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(const std::string& group,
-                                                                   const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                   const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                    const ros::Duration& wait_for_servers)
   : MoveGroupInterface(group, tf_buffer, ros::WallDuration(wait_for_servers.toSec()))
 {
 }
 
 moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(const Options& opt,
-                                                                   const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+                                                                   const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
                                                                    const ros::WallDuration& wait_for_servers)
 {
   impl_ = new MoveGroupInterfaceImpl(opt, tf_buffer ? tf_buffer : getSharedTF(), wait_for_servers);
 }
 
 moveit::planning_interface::MoveGroupInterface::MoveGroupInterface(
-    const moveit::planning_interface::MoveGroupInterface::Options& opt, const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer,
+    const moveit::planning_interface::MoveGroupInterface::Options& opt, const std::shared_ptr<tf2_ros::Buffer>& tf_buffer,
     const ros::Duration& wait_for_servers)
   : MoveGroupInterface(opt, tf_buffer, ros::WallDuration(wait_for_servers.toSec()))
 {

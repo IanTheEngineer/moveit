@@ -65,7 +65,7 @@ public:
   // needed
   MoveGroupInterfaceWrapper(const std::string& group_name, const std::string& robot_description)
     : py_bindings_tools::ROScppInitializer()
-    , MoveGroupInterface(Options(group_name, robot_description), boost::shared_ptr<tf2_ros::Buffer>(),
+    , MoveGroupInterface(Options(group_name, robot_description), std::shared_ptr<tf2_ros::Buffer>(),
                          ros::WallDuration(5, 0))
   {
   }
