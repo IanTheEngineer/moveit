@@ -140,7 +140,7 @@ public:
    */
   PlanningSceneMonitor(const planning_scene::PlanningScenePtr& scene,
                        const robot_model_loader::RobotModelLoaderPtr& rml,
-                       const boost::shared_ptr<tf2_ros::Buffer>& tf = boost::shared_ptr<tf2_ros::Buffer>(),
+                       const boost::shared_ptr<tf2_ros::Buffer>& tf_buffer = boost::shared_ptr<tf2_ros::Buffer>(),
                        const std::string& name = "");
 
   ~PlanningSceneMonitor();
