@@ -85,6 +85,7 @@ std::shared_ptr<tf2_ros::Buffer> getSharedTF()
   boost::mutex::scoped_lock slock(s.lock_);
   if (!s.tf_buffer_ || !s.tf_listener_) {
     s.tf_buffer_.reset(new tf2_ros::Buffer());
+    // FIXME(imcmahon) is there some common NodeHandle we should be re-using, or is ok to create one in TFListener?
     s.tf_listener_.reset(new tf2_ros::TransformListener(*s.tf_buffer_));
   }
   return s.tf_buffer_;
