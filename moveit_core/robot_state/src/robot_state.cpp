@@ -978,7 +978,7 @@ const Eigen::Affine3d& RobotState::getFrameTransform(const std::string& id) cons
   BOOST_VERIFY(checkLinkTransforms());
 
   static const Eigen::Affine3d identity_transform = Eigen::Affine3d::Identity();
-  if (id.size() + 1 == robot_model_->getModelFrame().size() && '/' + id == robot_model_->getModelFrame())
+  if (id == robot_model_->getModelFrame())
     return identity_transform;
   if (robot_model_->hasLinkModel(id))
   {
