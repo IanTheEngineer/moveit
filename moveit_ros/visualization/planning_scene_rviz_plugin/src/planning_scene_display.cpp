@@ -486,12 +486,8 @@ void PlanningSceneDisplay::unsetLinkColor(rviz::Robot* robot, const std::string&
 // ******************************************************************************************
 planning_scene_monitor::PlanningSceneMonitorPtr PlanningSceneDisplay::createPlanningSceneMonitor()
 {
-  // FIXME!(imcmahon) this forces the Planning Scene Monitor to allocate a new tf2_ros::Buffer
-  // and tf2_ros::TransformListener  on each invocation. These instances are properly deleted on exit,
-  // but it would be better to remove the null shared pointer once tf2_ros::Buffer is exposed from
-  // RViz with something like context_->getFrameManager()->getTFClientPtr()
   return planning_scene_monitor::PlanningSceneMonitorPtr(new planning_scene_monitor::PlanningSceneMonitor(
-      robot_description_property_->getStdString(), std::shared_ptr<tf2_ros::Buffer>(),
+      robot_description_property_->getStdString(), context_->getFrameManager()->getTFBufferPtr(),
       getNameStd() + "_planning_scene_monitor"));
 }
 
