@@ -275,13 +275,7 @@ void collision_detection::costSourceToMsg(const CostSource& cost_source, moveit_
 void collision_detection::contactToMsg(const Contact& contact, moveit_msgs::ContactInformation& msg)
 {
   msg.position = tf2::toMsg(contact.pos);
-  // FIXME: there really should be a conversion for
-  // geometry_msgs::Vector3 toMsg(const Eigen::Vector3d& in)
-  // but it involves tricky business with template specialization
-  // and *not* function overloading
-  msg.normal.x = contact.normal.x();
-  msg.normal.y = contact.normal.y();
-  msg.normal.z = contact.normal.z();
+  tf2::toMsg(contact.normal, msg.normal);
   msg.depth = contact.depth;
   msg.contact_body_1 = contact.body_name_1;
   msg.contact_body_2 = contact.body_name_2;
