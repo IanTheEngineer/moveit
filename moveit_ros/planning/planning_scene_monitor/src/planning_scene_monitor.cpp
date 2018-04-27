@@ -1300,13 +1300,7 @@ void planning_scene_monitor::PlanningSceneMonitor::getUpdatedFrameTransforms(
   tf_buffer_->_getFrameStrings(all_frame_names);
   for (std::size_t i = 0; i < all_frame_names.size(); ++i)
   {
-    const std::string& frame_no_slash = (!all_frame_names[i].empty() && all_frame_names[i][0] == '/') ?
-                                            all_frame_names[i].substr(1) :
-                                            all_frame_names[i];
-    const std::string& frame_with_slash =
-        (!all_frame_names[i].empty() && all_frame_names[i][0] != '/') ? '/' + all_frame_names[i] : all_frame_names[i];
-
-    if (frame_with_slash == target || getRobotModel()->hasLinkModel(frame_no_slash))
+    if (all_frame_names[i] == target || getRobotModel()->hasLinkModel(all_frame_names[i]))
       continue;
 
     ros::Time stamp(0);
@@ -1333,7 +1327,7 @@ void planning_scene_monitor::PlanningSceneMonitor::getUpdatedFrameTransforms(
                                          << ex.what() << ")");
       continue;
     }
-    f.header.frame_id = frame_with_slash;
+    f.header.frame_id = all_frame_names[i];
     f.child_frame_id = target;
     transforms.push_back(f);
   }
