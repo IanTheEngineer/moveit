@@ -276,11 +276,7 @@ void RobotTrajectory::getRobotTrajectoryMsg(moveit_msgs::RobotTrajectory& trajec
       trajectory.multi_dof_joint_trajectory.points[i].transforms.resize(mdof.size());
       for (std::size_t j = 0; j < mdof.size(); ++j)
       {
-        // FIXME: there should be a
-        // geometry_msgs::Transform eigenToTransform(const Eigen::Affine3d& T)
-        // so that we don't need to use the intermediate TransformStamped
-        geometry_msgs::TransformStamped ts;
-        ts = tf2::eigenToTransform(waypoints_[i]->getJointTransform(mdof[j]));
+        geometry_msgs::TransformStamped ts = tf2::eigenToTransform(waypoints_[i]->getJointTransform(mdof[j]));
         trajectory.multi_dof_joint_trajectory.points[i].transforms[j] = ts.transform;
         // TODO: currently only checking for planar multi DOF joints / need to add check for floating
         if (waypoints_[i]->hasVelocities() && (mdof[j]->getType() == robot_model::JointModel::JointType::PLANAR))
