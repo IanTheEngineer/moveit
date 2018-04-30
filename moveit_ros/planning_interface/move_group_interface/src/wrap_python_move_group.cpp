@@ -290,13 +290,11 @@ public:
         Eigen::Affine3d p;
         if (v.size() == 6)
         {
-          // RPY to Quaternion
           tf2::Quaternion tq;
           tq.setRPY(v[3], v[4], v[5]);
           Eigen::Quaterniond eq;
           tf2::convert(tq, eq);
           p = Eigen::Affine3d(eq);
-
         }
         else
           p = Eigen::Affine3d(Eigen::Quaterniond(v[6], v[3], v[4], v[5]));
@@ -345,7 +343,6 @@ public:
     std::vector<double> v = py_bindings_tools::doubleFromList(pose);
     geometry_msgs::Pose msg;
     if (v.size() == 6){
-      // RPY to Quaternion
       tf2::Quaternion q;
       q.setRPY(v[3], v[4], v[5]);
       tf2::convert(q, msg.orientation);

@@ -187,9 +187,10 @@ bool move_group::MoveGroupCapability::performTransform(geometry_msgs::PoseStampe
   {
     std::string error;
     ros::Time common_time;
-    int pf = context_->planning_scene_monitor_->getTFClient()->_lookupFrameNumber(pose_msg.header.frame_id);
-    int cf = context_->planning_scene_monitor_->getTFClient()->_lookupFrameNumber(target_frame);
-    context_->planning_scene_monitor_->getTFClient()->_getLatestCommonTime(pf, cf, common_time, &error);
+    context_->planning_scene_monitor_->getTFClient()->_getLatestCommonTime(
+        context_->planning_scene_monitor_->getTFClient()->_lookupFrameNumber(pose_msg.header.frame_id),
+        context_->planning_scene_monitor_->getTFClient()->_lookupFrameNumber(target_frame),
+        common_time, &error);
     if (!error.empty())
       ROS_ERROR("TF Problem: %s", error.c_str());
 

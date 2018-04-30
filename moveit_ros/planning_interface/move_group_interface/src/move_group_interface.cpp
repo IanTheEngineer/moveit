@@ -1902,7 +1902,6 @@ inline void transformPose(const tf2_ros::Buffer& tf_buffer, const std::string& d
 {
   if (desired_frame != target.header.frame_id)
   {
-    // FIXME(imcmahon): is a message copy necessary here?
     geometry_msgs::PoseStamped target_in(target);
     tf_buffer.transform(target_in, target, desired_frame);
     // we leave the stamp to ros::Time(0) on purpose
